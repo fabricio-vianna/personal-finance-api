@@ -1,5 +1,7 @@
 package com.fabricio.personal_finance_api.service;
 
+import java.util.Optional;
+
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,5 +15,10 @@ public class UserService {
 
     public User create(User user) {
         return repository.save(user);
+    }
+
+    public User findById(Long id) {
+        Optional<User> obj = repository.findById(id);
+        return obj.get();
     }
 }
