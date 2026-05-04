@@ -1,5 +1,6 @@
 package com.fabricio.personal_finance_api.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.fabricio.personal_finance_api.entity.User;
@@ -20,5 +21,9 @@ public class UserService {
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
         return obj.get();
+    }
+
+    public List<User> findAll() {
+        return repository.findAll();
     }
 }
