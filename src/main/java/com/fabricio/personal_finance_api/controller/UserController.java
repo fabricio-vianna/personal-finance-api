@@ -1,5 +1,7 @@
 package com.fabricio.personal_finance_api.controller;
 
+import java.util.List;
+
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.service.UserService;
 import jakarta.validation.Valid;
@@ -28,5 +30,10 @@ public class UserController {
     @GetMapping("/{id}")
     public User findById(@PathVariable Long id) {
         return service.findById(id);
+    }
+
+    @GetMapping
+    public List<User> findAll() {
+        return service.findAll();
     }
 }
