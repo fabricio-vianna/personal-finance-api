@@ -26,4 +26,9 @@ public class UserService {
     public List<User> findAll() {
         return repository.findAll();
     }
+
+    public void delete(Long id) {
+        findById(id);
+        repository.deleteById(id);
+    }
 }
