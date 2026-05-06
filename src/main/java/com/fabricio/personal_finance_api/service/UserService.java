@@ -3,6 +3,7 @@ package com.fabricio.personal_finance_api.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.fabricio.personal_finance_api.dto.UserDTO;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,15 @@ public class UserService {
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
         newObj.setPassword(obj.getPassword());
+    }
+
+    public User fromDto(UserDTO objDto) {
+        User user = new User();
+
+        user.setId(objDto.getId());
+        user.setName(objDto.getName());
+        user.setEmail(objDto.getEmail());
+
+        return user;
     }
 }
