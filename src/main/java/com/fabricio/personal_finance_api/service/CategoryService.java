@@ -28,6 +28,11 @@ public class CategoryService {
         return respository.findAll();
     }
 
+    public void delete(Long id) {
+        findById(id);
+        respository.deleteById(id);
+    }
+
     public Category fromDto(CategoryDTO objDto) {
         Category category = new Category();
 
