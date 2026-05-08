@@ -28,9 +28,22 @@ public class CategoryService {
         return respository.findAll();
     }
 
+    public Category update(Category obj) {
+        Category newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return respository.save(newObj);
+    }
+
     public void delete(Long id) {
         findById(id);
         respository.deleteById(id);
+    }
+
+    public void updateData(Category newObj, Category obj) {
+        newObj.setId(obj.getId());
+        newObj.setName(obj.getName());
+        newObj.setType(obj.getType());
+        newObj.setUserId(obj.getUserId());
     }
 
     public Category fromDto(CategoryDTO objDto) {
