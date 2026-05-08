@@ -41,4 +41,9 @@ public class TransactionService {
 
         return transaction;
     }
+
+    public void delete(Long id) {
+        findById(id);
+        repository.deleteById(id);
+    }
 }
