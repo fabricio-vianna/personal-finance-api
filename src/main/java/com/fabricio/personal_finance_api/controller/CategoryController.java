@@ -41,7 +41,7 @@ public class CategoryController {
     }
 
     @RequestMapping
-    public ResponseEntity<List<CategoryDTO>> findAll(@Valid @RequestBody CategoryDTO objDto) {
+    public ResponseEntity<List<CategoryDTO>> findAll() {
         List<Category> list = service.findAll();
         List<CategoryDTO> listDto = list.stream().map(x -> new CategoryDTO(x)).toList();
         return ResponseEntity.ok(listDto);
