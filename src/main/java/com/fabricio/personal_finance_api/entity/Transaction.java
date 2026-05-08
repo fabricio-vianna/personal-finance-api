@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -42,13 +43,19 @@ public class Transaction implements Serializable {
     private TransactionType type;
 
     @JsonIgnore
-    private LocalDateTime transactionDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private Long userId;
     private Long categoryId;
 
     @PrePersist
     public void prePersist() {
-        this.transactionDate = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 }

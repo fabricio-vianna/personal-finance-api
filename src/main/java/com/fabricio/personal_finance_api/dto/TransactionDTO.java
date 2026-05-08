@@ -20,17 +20,19 @@ public class TransactionDTO {
     private String description;
     private BigDecimal amount;
     private TransactionType type;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Long userId;
     private Long categoryId;
-    private LocalDateTime transactionDate;
 
     public TransactionDTO(Transaction transaction) {
         this.id = transaction.getId();
         this.description = transaction.getDescription();
         this.amount = transaction.getAmount();
         this.type = transaction.getType();
+        this.createdAt = transaction.getCreatedAt();
+        this.updatedAt = transaction.getUpdatedAt();
         this.userId = transaction.getUserId();
         this.categoryId = transaction.getCategoryId();
-        this.transactionDate = transaction.getTransactionDate();
     }
 }

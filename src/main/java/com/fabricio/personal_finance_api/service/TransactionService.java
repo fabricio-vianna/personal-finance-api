@@ -40,11 +40,9 @@ public class TransactionService {
     }
 
     private void updateData(Transaction newObj, Transaction obj) {
-        newObj.setId(obj.getId());
         newObj.setDescription(obj.getDescription());
         newObj.setAmount(obj.getAmount());
         newObj.setType(obj.getType());
-        newObj.setTransactionDate(obj.getTransactionDate());
         newObj.setUserId(obj.getUserId());
         newObj.setCategoryId(obj.getCategoryId());
     }
@@ -56,7 +54,6 @@ public class TransactionService {
         transaction.setDescription(objDto.getDescription());
         transaction.setAmount(objDto.getAmount());
         transaction.setType(objDto.getType());
-        transaction.setTransactionDate(objDto.getTransactionDate());
         transaction.setUserId(objDto.getUserId());
         transaction.setCategoryId(objDto.getCategoryId());
 
