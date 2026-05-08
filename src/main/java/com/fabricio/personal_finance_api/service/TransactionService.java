@@ -1,5 +1,7 @@
 package com.fabricio.personal_finance_api.service;
 
+import java.util.List;
+
 import com.fabricio.personal_finance_api.dto.TransactionDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
@@ -14,6 +16,10 @@ public class TransactionService {
 
     public Transaction create(Transaction obj) {
         return repository.save(obj);
+    }
+
+    public List<Transaction> findAll() {
+        return repository.findAll();
     }
 
     public Transaction fromDto(TransactionDTO objDto) {
