@@ -1,5 +1,7 @@
 package com.fabricio.personal_finance_api.service;
 
+import java.util.List;
+
 import com.fabricio.personal_finance_api.dto.CategoryDTO;
 import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
@@ -14,6 +16,10 @@ public class CategoryService {
 
     public Category create(Category obj) {
         return respository.save(obj);
+    }
+
+    public List<Category> findAll() {
+        return respository.findAll();
     }
 
     public Category fromDto(CategoryDTO objDto) {
