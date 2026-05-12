@@ -7,6 +7,7 @@ import com.fabricio.personal_finance_api.dto.CategoryDTO;
 import com.fabricio.personal_finance_api.dto.UserDTO;
 import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.User;
+import com.fabricio.personal_finance_api.service.CategoryService;
 import com.fabricio.personal_finance_api.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody UserDTO objDto) {
@@ -69,5 +73,11 @@ public class UserController {
         List<Category> list = obj.getCategories();
         List<CategoryDTO> listDto = list.stream().map(x -> new CategoryDTO(x)).toList();
         return ResponseEntity.ok(listDto);
+    }
+
+    @GetMapping("/{userId}/categories/{categoryId}")
+    public ResponseEntity<CategoryDTO> findCategoriesById(@PathVariable Long userId, @PathVariable Long categoryId) {
+        Category obj = categoryService.findByUserAndCategory(userId, categoryId);
+        return ResponseEntity.ok(new CategoryDTO(obj));
     }
 }

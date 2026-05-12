@@ -8,7 +8,9 @@ import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties.Apiversion.Use;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -49,6 +51,11 @@ public class CategoryService {
         newObj.setName(obj.getName());
         newObj.setType(obj.getType());
         newObj.setUser(obj.getUser());
+    }
+
+    public Category findByUserAndCategory(Long userId, Long categoryId) {
+        Optional<Category> obj = respository.findByIdAndUser_Id(categoryId, userId);
+        return obj.orElseThrow(() -> new RuntimeException("Category not found!"));
     }
 
     public Category fromDto(CategoryDTO objDto) {
