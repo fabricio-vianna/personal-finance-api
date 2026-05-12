@@ -51,6 +51,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Category> categories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Transaction> transactions = new ArrayList<>();
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

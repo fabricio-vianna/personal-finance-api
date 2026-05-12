@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import com.fabricio.personal_finance_api.dto.TransactionDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
+import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
+import com.fabricio.personal_finance_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class TransactionService {
 
     @Autowired
     private TransactionRepository repository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Transaction create(Transaction obj) {
         return repository.save(obj);
@@ -43,7 +48,7 @@ public class TransactionService {
         newObj.setDescription(obj.getDescription());
         newObj.setAmount(obj.getAmount());
         newObj.setType(obj.getType());
-        newObj.setUserId(obj.getUserId());
+        newObj.setUser(obj.getUser());
         newObj.setCategoryId(obj.getCategoryId());
     }
 
@@ -54,7 +59,10 @@ public class TransactionService {
         transaction.setDescription(objDto.getDescription());
         transaction.setAmount(objDto.getAmount());
         transaction.setType(objDto.getType());
-        transaction.setUserId(objDto.getUserId());
+
+        User user = userRepository.findById(objDto.getId()).get();
+
+        transaction.setUser(user);
         transaction.setCategoryId(objDto.getCategoryId());
 
         return transaction;

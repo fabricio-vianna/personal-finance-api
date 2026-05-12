@@ -32,7 +32,7 @@ public class TransactionDTO {
         this.type = transaction.getType();
         this.createdAt = transaction.getCreatedAt();
         this.updatedAt = transaction.getUpdatedAt();
-        this.userId = transaction.getUserId();
+        this.userId = transaction.getUser().getId();
         this.categoryId = transaction.getCategoryId();
     }
 }
