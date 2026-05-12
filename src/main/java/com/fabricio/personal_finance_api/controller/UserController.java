@@ -4,8 +4,10 @@ import java.net.URI;
 import java.util.List;
 
 import com.fabricio.personal_finance_api.dto.CategoryDTO;
+import com.fabricio.personal_finance_api.dto.TransactionDTO;
 import com.fabricio.personal_finance_api.dto.UserDTO;
 import com.fabricio.personal_finance_api.entity.Category;
+import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.service.CategoryService;
 import com.fabricio.personal_finance_api.service.UserService;
@@ -79,5 +81,13 @@ public class UserController {
     public ResponseEntity<CategoryDTO> findCategoriesById(@PathVariable Long userId, @PathVariable Long categoryId) {
         Category obj = categoryService.findByUserAndCategory(userId, categoryId);
         return ResponseEntity.ok(new CategoryDTO(obj));
+    }
+
+    @GetMapping("/{id}/transactions")
+    public ResponseEntity<List<TransactionDTO>> findTransactions(@PathVariable Long id) {
+        User obj = service.findById(id);
+        List<Transaction> list = obj.getTransactions();
+        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+        return ResponseEntity.ok(listDto);
     }
 }
