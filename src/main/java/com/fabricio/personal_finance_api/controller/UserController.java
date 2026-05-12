@@ -3,7 +3,9 @@ package com.fabricio.personal_finance_api.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.fabricio.personal_finance_api.dto.CategoryDTO;
 import com.fabricio.personal_finance_api.dto.UserDTO;
+import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.service.UserService;
 import jakarta.validation.Valid;
@@ -59,5 +61,13 @@ public class UserController {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/categories")
+    public ResponseEntity<List<CategoryDTO>> findCategories(@PathVariable Long id) {
+        User obj = service.findById(id);
+        List<Category> list = obj.getCategories();
+        List<CategoryDTO> listDto = list.stream().map(x -> new CategoryDTO(x)).toList();
+        return ResponseEntity.ok(listDto);
     }
 }

@@ -3,12 +3,15 @@ package com.fabricio.personal_finance_api.entity;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -44,6 +47,9 @@ public class User implements Serializable {
     @JsonIgnore
     private String password;
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "user")
+    private List<Category> categories = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
