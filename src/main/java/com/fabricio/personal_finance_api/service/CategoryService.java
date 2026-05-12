@@ -8,42 +8,40 @@ import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties.Apiversion.Use;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService {
 
     @Autowired
-    private CategoryRespository respository;
+    private CategoryRespository repository;
 
     @Autowired
     private UserRepository userRepository;
 
     public Category create(Category obj) {
-        return respository.save(obj);
+        return repository.save(obj);
     }
 
     public Category findById(Long id) {
-        Optional<Category> obj = respository.findById(id);
+        Optional<Category> obj = repository.findById(id);
         return obj.get();
     }
 
     public List<Category> findAll() {
-        return respository.findAll();
+        return repository.findAll();
     }
 
     public Category update(Category obj) {
         Category newObj = findById(obj.getId());
         updateData(newObj, obj);
-        return respository.save(newObj);
+        return repository.save(newObj);
     }
 
     public void delete(Long id) {
         findById(id);
-        respository.deleteById(id);
+        repository.deleteById(id);
     }
 
     public void updateData(Category newObj, Category obj) {
@@ -54,7 +52,7 @@ public class CategoryService {
     }
 
     public Category findByUserAndCategory(Long userId, Long categoryId) {
-        Optional<Category> obj = respository.findByIdAndUser_Id(categoryId, userId);
+        Optional<Category> obj = repository.findByIdAndUser_Id(categoryId, userId);
         return obj.orElseThrow(() -> new RuntimeException("Category not found!"));
     }
 
