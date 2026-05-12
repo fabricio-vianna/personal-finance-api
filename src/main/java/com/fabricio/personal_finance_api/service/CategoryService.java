@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import com.fabricio.personal_finance_api.dto.CategoryDTO;
 import com.fabricio.personal_finance_api.entity.Category;
+import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
+import com.fabricio.personal_finance_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class CategoryService {
 
     @Autowired
     private CategoryRespository respository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Category create(Category obj) {
         return respository.save(obj);
@@ -43,7 +48,7 @@ public class CategoryService {
         newObj.setId(obj.getId());
         newObj.setName(obj.getName());
         newObj.setType(obj.getType());
-        newObj.setUserId(obj.getUserId());
+        newObj.setUser(obj.getUser());
     }
 
     public Category fromDto(CategoryDTO objDto) {
@@ -52,7 +57,10 @@ public class CategoryService {
         category.setId(objDto.getId());
         category.setName(objDto.getName());
         category.setType(objDto.getType());
-        category.setUserId(objDto.getUserId());
+
+        User user = userRepository.findById(objDto.getUserId()).get();
+
+        category.setUser(user);
 
         return category;
     }
