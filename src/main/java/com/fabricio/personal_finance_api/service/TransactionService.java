@@ -52,6 +52,11 @@ public class TransactionService {
         newObj.setCategoryId(obj.getCategoryId());
     }
 
+    public Transaction findByUserAndTransaction(Long userId, Long transactionId) {
+        Optional<Transaction> obj = repository.findByIdAndUser_Id(transactionId, userId);
+        return obj.orElseThrow(() -> new RuntimeException("Category not found!"));
+    }
+
     public Transaction fromDto(TransactionDTO objDto) {
         Transaction transaction = new Transaction();
 
