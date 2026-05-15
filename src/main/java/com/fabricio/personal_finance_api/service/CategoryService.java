@@ -63,7 +63,7 @@ public class CategoryService {
         repository.findById(categoryId).orElseThrow(() -> new ObjectNotFoundException("Category not found with id " + categoryId));
 
         Optional<Category> obj = repository.findByIdAndUser_Id(categoryId, userId);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Category not found for this userz"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Category not found for this user"));
     }
 
     public Category fromDto(CategoryDTO objDto) {
