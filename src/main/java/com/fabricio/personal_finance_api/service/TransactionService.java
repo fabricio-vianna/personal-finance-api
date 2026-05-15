@@ -8,7 +8,9 @@ import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
+import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +32,7 @@ public class TransactionService {
 
     public Transaction findById(Long id) {
         Optional<Transaction> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found with id " + id));
     }
 
     public Transaction update(Transaction obj) {
@@ -40,8 +42,12 @@ public class TransactionService {
     }
 
     public void delete(Long id) {
-        findById(id);
-        repository.deleteById(id);
+        try {
+            findById(id);
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ObjectNotFoundException("Object not found with id " + id);
+        }
     }
 
     private void updateData(Transaction newObj, Transaction obj) {
@@ -53,8 +59,13 @@ public class TransactionService {
     }
 
     public Transaction findByUserAndTransaction(Long userId, Long transactionId) {
+
+        repository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("User not found with id " + userId));
+        repository.findById(transactionId).orElseThrow(() -> new ObjectNotFoundException("Transaction not found with id " + transactionId));
+
+
         Optional<Transaction> obj = repository.findByIdAndUser_Id(transactionId, userId);
-        return obj.orElseThrow(() -> new RuntimeException("Category not found!"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Transaction not found with this user"));
     }
 
     public Transaction fromDto(TransactionDTO objDto) {
