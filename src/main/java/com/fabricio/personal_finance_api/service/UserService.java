@@ -42,11 +42,11 @@ public class UserService {
     public User update(User obj) {
         try {
             User newObj = findById(obj.getId());
+            updateData(newObj, obj);
+            return repository.save(newObj);
         } catch (EmptyResultDataAccessException e) {
-            throw new ObjectNotFoundException("Object not found with id " + id);
+            throw new ObjectNotFoundException("Object not found with id " + obj.getId());
         }
-        updateData(newObj, obj);
-        return repository.save(newObj);
     }
 
     private void updateData(User newObj, User obj) {
