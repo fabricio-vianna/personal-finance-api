@@ -60,4 +60,10 @@ public class CategoryController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/users/{userId}/categories/{categoryId}")
+    public ResponseEntity<CategoryDTO> findByUserAndCategory(@PathVariable Long userId, @PathVariable Long categoryId) {
+        Category obj = service.findByUserAndCategory(userId, categoryId);
+        return ResponseEntity.ok(new CategoryDTO(obj));
+    }
 }
