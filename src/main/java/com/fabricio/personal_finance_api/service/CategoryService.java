@@ -36,9 +36,13 @@ public class CategoryService {
     }
 
     public Category update(Category obj) {
-        Category newObj = findById(obj.getId());
-        updateData(newObj, obj);
-        return repository.save(newObj);
+        try {
+            Category newObj = findById(obj.getId());
+            updateData(newObj, obj);
+            return repository.save(newObj);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ObjectNotFoundException("Object not found with id " + obj.getId());
+        }
     }
 
     public void delete(Long id) {
