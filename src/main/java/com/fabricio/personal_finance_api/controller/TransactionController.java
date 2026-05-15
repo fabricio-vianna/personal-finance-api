@@ -47,6 +47,13 @@ public class TransactionController {
         return ResponseEntity.ok(new TransactionDTO(obj));
     }
 
+    @GetMapping(value = "/categories/{categoryId}")
+    public ResponseEntity<List<TransactionDTO>> findByCategoryId(@PathVariable Long categoryId) {
+        List<Transaction> obj = service.findByCategoryId(categoryId);
+        List<TransactionDTO> listDto = obj.stream().map(x -> new TransactionDTO(x)).toList();
+        return ResponseEntity.ok(listDto);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Transaction> update(@RequestBody TransactionDTO objDto, @PathVariable Long id) {
         Transaction obj = service.fromDto(objDto);

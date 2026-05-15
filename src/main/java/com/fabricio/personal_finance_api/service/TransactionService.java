@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.fabricio.personal_finance_api.dto.TransactionDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.User;
+import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
 import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
@@ -22,6 +23,9 @@ public class TransactionService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CategoryRespository categoryRespository;
+
     public Transaction create(Transaction obj) {
         return repository.save(obj);
     }
@@ -33,6 +37,12 @@ public class TransactionService {
     public Transaction findById(Long id) {
         Optional<Transaction> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found with id " + id));
+    }
+
+    public List<Transaction> findByCategoryId(Long id) {
+        categoryRespository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Category not found with id " + id));
+
+        return repository.findByCategoryId(id);
     }
 
     public Transaction update(Transaction obj) {
