@@ -6,7 +6,9 @@ import java.util.Optional;
 import com.fabricio.personal_finance_api.dto.UserDTO;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.UserRepository;
+import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +23,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found with id " + id));
     }
 
     public List<User> findAll() {
@@ -29,12 +31,20 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        findById(id);
-        repository.deleteById(id);
+        try {
+            findById(id);
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ObjectNotFoundException("Object not found with id " + id);
+        }
     }
 
     public User update(User obj) {
-        User newObj = findById(obj.getId());
+        try {
+            User newObj = findById(obj.getId());
+        } catch (EmptyResultDataAccessException e) {
+            throw new ObjectNotFoundException("Object not found with id " + id);
+        }
         updateData(newObj, obj);
         return repository.save(newObj);
     }
