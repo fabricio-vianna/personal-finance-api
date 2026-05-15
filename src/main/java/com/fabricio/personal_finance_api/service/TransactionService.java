@@ -36,9 +36,13 @@ public class TransactionService {
     }
 
     public Transaction update(Transaction obj) {
-        Transaction newObj = findById(obj.getId());
-        updateData(newObj, obj);
-        return repository.save(newObj);
+        try {
+            Transaction newObj = findById(obj.getId());
+            updateData(newObj, obj);
+            return repository.save(newObj);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ObjectNotFoundException("Object not found with id " + obj.getId());
+        }
     }
 
     public void delete(Long id) {
