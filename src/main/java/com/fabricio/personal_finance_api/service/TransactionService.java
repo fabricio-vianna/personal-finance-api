@@ -80,7 +80,7 @@ public class TransactionService {
         transaction.setAmount(objDto.getAmount());
         transaction.setType(objDto.getType());
 
-        User user = userRepository.findById(objDto.getId()).get();
+        User user = userRepository.findById(objDto.getId()).orElseThrow(() -> new ObjectNotFoundException("User not found with id " + objDto.getId()));
 
         transaction.setUser(user);
         transaction.setCategoryId(objDto.getCategoryId());
