@@ -8,7 +8,9 @@ import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
+import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,7 +28,7 @@ public class CategoryService {
 
     public Category findById(Long id) {
         Optional<Category> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found with id " + id));
     }
 
     public List<Category> findAll() {
@@ -40,8 +42,12 @@ public class CategoryService {
     }
 
     public void delete(Long id) {
-        findById(id);
-        repository.deleteById(id);
+        try {
+            findById(id);
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ObjectNotFoundException("Object not found with id " + id);
+        }
     }
 
     public void updateData(Category newObj, Category obj) {
@@ -53,7 +59,7 @@ public class CategoryService {
 
     public Category findByUserAndCategory(Long userId, Long categoryId) {
         Optional<Category> obj = repository.findByIdAndUser_Id(categoryId, userId);
-        return obj.orElseThrow(() -> new RuntimeException("Category not found!"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Category not found with id " + categoryId));
     }
 
     public Category fromDto(CategoryDTO objDto) {
