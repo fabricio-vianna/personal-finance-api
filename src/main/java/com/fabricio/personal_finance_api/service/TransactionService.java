@@ -47,11 +47,7 @@ public class TransactionService {
     }
 
     public List<Transaction> findByType(TransactionType type) {
-        try {
-            return repository.findByType(type);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
+        return repository.findByType(type);
     }
 
     public Transaction update(Transaction obj) {
