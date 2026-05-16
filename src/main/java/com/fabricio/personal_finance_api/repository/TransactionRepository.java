@@ -1,5 +1,6 @@
 package com.fabricio.personal_finance_api.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,4 +15,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findByCategoryId(Long categoryId);
 
     List<Transaction> findByType(TransactionType type);
+
+    List<Transaction> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 }

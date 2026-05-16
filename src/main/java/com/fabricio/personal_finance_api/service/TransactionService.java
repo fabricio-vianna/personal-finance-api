@@ -1,5 +1,6 @@
 package com.fabricio.personal_finance_api.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +86,10 @@ public class TransactionService {
 
     public List<Transaction> findByType(TransactionType type) {
         return repository.findByType(type);
+    }
+
+    public List<Transaction> findByDate(LocalDateTime start, LocalDateTime end) {
+        return repository.findByCreatedAtBetween(start, end);
     }
 
     public Transaction fromDto(TransactionDTO objDto) {

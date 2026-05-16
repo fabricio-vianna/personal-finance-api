@@ -1,6 +1,7 @@
 package com.fabricio.personal_finance_api.controller;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fabricio.personal_finance_api.dto.TransactionDTO;
@@ -74,6 +75,14 @@ public class TransactionController {
     @GetMapping(value = "/type")
     public ResponseEntity<List<TransactionDTO>> findByType(@RequestParam TransactionType type) {
         List<Transaction> list = service.findByType(type);
+        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+
+        return ResponseEntity.ok(listDto);
+    }
+
+    @GetMapping(value = "/date")
+    public ResponseEntity<List<TransactionDTO>> findByCreatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
+        List<Transaction> list = service.findByDate(start, end);
         List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
 
         return ResponseEntity.ok(listDto);
