@@ -40,16 +40,6 @@ public class TransactionService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found with id " + id));
     }
 
-    public List<Transaction> findByCategoryId(Long id) {
-        categoryRespository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Category not found with id " + id));
-
-        return repository.findByCategoryId(id);
-    }
-
-    public List<Transaction> findByType(TransactionType type) {
-        return repository.findByType(type);
-    }
-
     public Transaction update(Transaction obj) {
         try {
             Transaction newObj = findById(obj.getId());
@@ -85,6 +75,16 @@ public class TransactionService {
 
         Optional<Transaction> obj = repository.findByIdAndUser_Id(transactionId, userId);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Transaction not found with this user"));
+    }
+
+    public List<Transaction> findByCategoryId(Long id) {
+        categoryRespository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Category not found with id " + id));
+
+        return repository.findByCategoryId(id);
+    }
+
+    public List<Transaction> findByType(TransactionType type) {
+        return repository.findByType(type);
     }
 
     public Transaction fromDto(TransactionDTO objDto) {
