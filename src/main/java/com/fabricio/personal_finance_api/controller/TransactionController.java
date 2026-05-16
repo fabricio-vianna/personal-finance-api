@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fabricio.personal_finance_api.dto.TransactionDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
+import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -51,6 +53,15 @@ public class TransactionController {
     public ResponseEntity<List<TransactionDTO>> findByCategoryId(@PathVariable Long categoryId) {
         List<Transaction> obj = service.findByCategoryId(categoryId);
         List<TransactionDTO> listDto = obj.stream().map(x -> new TransactionDTO(x)).toList();
+
+        return ResponseEntity.ok(listDto);
+    }
+
+    @GetMapping(value = "/type")
+    public ResponseEntity<List<TransactionDTO>> findByType(@RequestParam TransactionType type) {
+        List<Transaction> list = service.findByType(type);
+        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+
         return ResponseEntity.ok(listDto);
     }
 
