@@ -87,4 +87,12 @@ public class TransactionController {
 
         return ResponseEntity.ok(listDto);
     }
+
+    @GetMapping(value = "/date")
+    public ResponseEntity<List<TransactionDTO>> findByUpdatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
+        List<Transaction> list = service.findByUpdatedDate(start, end);
+        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+
+        return ResponseEntity.ok(listDto);
+    }
 }

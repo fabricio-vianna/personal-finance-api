@@ -92,6 +92,10 @@ public class TransactionService {
         return repository.findByCreatedAtBetween(start, end);
     }
 
+    public List<Transaction> findByUpdatedDate(LocalDateTime start, LocalDateTime end) {
+        return repository.findByUpdatedAtBetween(start, end);
+    }
+
     public Transaction fromDto(TransactionDTO objDto) {
         Transaction transaction = new Transaction();
 

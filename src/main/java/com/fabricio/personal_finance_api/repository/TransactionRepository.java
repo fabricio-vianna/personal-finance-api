@@ -17,4 +17,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findByType(TransactionType type);
 
     List<Transaction> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
+
+    List<Transaction> findByUpdatedAtBetween(LocalDateTime start, LocalDateTime end);
 }
