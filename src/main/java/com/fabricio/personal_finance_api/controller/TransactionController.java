@@ -49,6 +49,20 @@ public class TransactionController {
         return ResponseEntity.ok(new TransactionDTO(obj));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Transaction> update(@RequestBody TransactionDTO objDto, @PathVariable Long id) {
+        Transaction obj = service.fromDto(objDto);
+        obj.setId(id);
+        obj = service.update(obj);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping(value = "/categories/{categoryId}")
     public ResponseEntity<List<TransactionDTO>> findByCategoryId(@PathVariable Long categoryId) {
         List<Transaction> obj = service.findByCategoryId(categoryId);
@@ -63,19 +77,5 @@ public class TransactionController {
         List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
 
         return ResponseEntity.ok(listDto);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Transaction> update(@RequestBody TransactionDTO objDto, @PathVariable Long id) {
-        Transaction obj = service.fromDto(objDto);
-        obj.setId(id);
-        obj = service.update(obj);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }
