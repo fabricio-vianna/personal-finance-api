@@ -1,5 +1,6 @@
 package com.fabricio.personal_finance_api.controller;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -98,5 +99,11 @@ public class TransactionController {
         List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
 
         return ResponseEntity.ok(listDto);
+    }
+
+    @GetMapping(value = "/amount-type")
+    public ResponseEntity<BigDecimal> calculateAmountByType(@RequestParam TransactionType type) {
+        BigDecimal amount = reportService.calculateAmountByType(type);
+        return ResponseEntity.ok(amount);
     }
 }
