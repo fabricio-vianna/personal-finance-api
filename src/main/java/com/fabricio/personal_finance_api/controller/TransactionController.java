@@ -106,4 +106,10 @@ public class TransactionController {
         BigDecimal amount = reportService.calculateAmountByType(type);
         return ResponseEntity.ok(amount);
     }
+
+    @GetMapping(value = "/balance")
+    public ResponseEntity<BigDecimal> calculateBalance() {
+        BigDecimal balance = reportService.calculateBalance();
+        return ResponseEntity.ok(balance);
+    }
 }

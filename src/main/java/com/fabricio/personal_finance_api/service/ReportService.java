@@ -26,4 +26,21 @@ public class ReportService {
 
         return sum;
     }
+
+    public BigDecimal calculateBalance() {
+        BigDecimal sumIncome = BigDecimal.ZERO;
+        BigDecimal sumExpense = BigDecimal.ZERO;
+
+        List<Transaction> listIncome = repository.findByType(TransactionType.INCOME);
+        for (Transaction p : listIncome) {
+            sumIncome = sumIncome.add(p.getAmount());
+        }
+
+        List<Transaction> listExpense = repository.findByType(TransactionType.EXPENSE);
+        for (Transaction p : listExpense) {
+            sumExpense = sumExpense.add(p.getAmount());
+        }
+
+        return sumIncome.subtract(sumExpense);
+    }
 }
