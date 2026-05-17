@@ -7,6 +7,7 @@ import java.util.List;
 import com.fabricio.personal_finance_api.dto.TransactionDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.service.ReportService;
 import com.fabricio.personal_finance_api.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class TransactionController {
 
     @Autowired
     private TransactionService service;
+
+    @Autowired
+    private ReportService reportService;
 
     @PostMapping
     public ResponseEntity<TransactionDTO> create(@Valid @RequestBody TransactionDTO objDto) {
@@ -80,7 +84,7 @@ public class TransactionController {
         return ResponseEntity.ok(listDto);
     }
 
-    @GetMapping(value = "/date")
+    @GetMapping(value = "/created-at")
     public ResponseEntity<List<TransactionDTO>> findByCreatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
         List<Transaction> list = service.findByDate(start, end);
         List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
@@ -88,7 +92,7 @@ public class TransactionController {
         return ResponseEntity.ok(listDto);
     }
 
-    @GetMapping(value = "/date")
+    @GetMapping(value = "updated-at")
     public ResponseEntity<List<TransactionDTO>> findByUpdatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
         List<Transaction> list = service.findByUpdatedDate(start, end);
         List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
