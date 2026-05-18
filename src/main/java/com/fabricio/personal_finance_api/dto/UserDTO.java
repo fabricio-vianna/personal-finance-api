@@ -1,5 +1,6 @@
 package com.fabricio.personal_finance_api.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import com.fabricio.personal_finance_api.entity.User;
@@ -13,6 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4339247011963327092L;
 
     private Long id;
     private String name;
