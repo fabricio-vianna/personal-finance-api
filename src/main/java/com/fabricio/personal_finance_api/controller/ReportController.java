@@ -2,13 +2,18 @@ package com.fabricio.personal_finance_api.controller;
 
 import java.math.BigDecimal;
 
+import com.fabricio.personal_finance_api.dto.FinancialSummaryDTO;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/reports")
 public class ReportController {
 
     @Autowired
@@ -24,5 +29,11 @@ public class ReportController {
     public ResponseEntity<BigDecimal> calculateBalance() {
         BigDecimal balance = reportService.calculateBalance();
         return ResponseEntity.ok(balance);
+    }
+
+    @GetMapping(value = "/monthly")
+    public ResponseEntity<FinancialSummaryDTO> monthlyReport(@RequestParam Integer year, @RequestParam int month) {
+        FinancialSummaryDTO obj = reportService.monthlyReport(year, month);
+        return ResponseEntity.ok(obj);
     }
 }
