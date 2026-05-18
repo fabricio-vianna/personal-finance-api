@@ -9,7 +9,6 @@ import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
-import com.fabricio.personal_finance_api.repository.UserRepository;
 import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,9 +19,6 @@ public class TransactionService {
 
     @Autowired
     private TransactionRepository repository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private CategoryRespository categoryRespository;
