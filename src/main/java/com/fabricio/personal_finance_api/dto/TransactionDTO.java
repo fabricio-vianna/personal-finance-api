@@ -1,5 +1,7 @@
 package com.fabricio.personal_finance_api.dto;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,7 +16,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TransactionDTO {
+public class TransactionDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -180145505532167396L;
 
     private Long id;
     private String description;
