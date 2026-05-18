@@ -48,9 +48,9 @@ public class Instantiation implements CommandLineRunner {
 
         categoryRespository.saveAll(Arrays.asList(category1, category2, category3, category4));
 
-        Transaction transaction1 = new Transaction(null, "Pagamento mensal", new BigDecimal("5000.00"), TransactionType.INCOME, LocalDateTime.of(2026, 5, 12, 10, 0), LocalDateTime.of(2026, 5, 12, 10, 0), user1, category1.getId());
-        Transaction transaction2 = new Transaction(null, "Compra no mercado", new BigDecimal("250.75"), TransactionType.EXPENSE, LocalDateTime.of(2026, 5, 12, 12, 0), LocalDateTime.of(2026, 5, 12, 12, 0), user1, category2.getId());
-        Transaction transaction3 = new Transaction(null, "Projeto freelancer", new BigDecimal("1800.00"), TransactionType.INCOME, LocalDateTime.of(2026, 5, 12, 14, 0), LocalDateTime.of(2026, 5, 12, 14, 0), user2, category3.getId());
+        Transaction transaction1 = new Transaction(null, "Pagamento mensal", new BigDecimal("5000.00"), TransactionType.INCOME, LocalDateTime.of(2026, 5, 12, 10, 0), LocalDateTime.of(2026, 5, 12, 10, 0), user1, category1);
+        Transaction transaction2 = new Transaction(null, "Compra no mercado", new BigDecimal("250.75"), TransactionType.EXPENSE, LocalDateTime.of(2026, 5, 12, 12, 0), LocalDateTime.of(2026, 5, 12, 12, 0), user1, category2);
+        Transaction transaction3 = new Transaction(null, "Projeto freelancer", new BigDecimal("1800.00"), TransactionType.INCOME, LocalDateTime.of(2026, 5, 12, 14, 0), LocalDateTime.of(2026, 5, 12, 14, 0), user2, category3);
 
         transactionRepository.saveAll(Arrays.asList(transaction1, transaction2, transaction3));
     }

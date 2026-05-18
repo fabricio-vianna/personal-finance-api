@@ -52,7 +52,9 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @PrePersist
     public void prePersist() {

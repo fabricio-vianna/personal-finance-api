@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class TransactionResponseDTO implements Serializable {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Long userId;
-    private Long categoryId;
+    private Category category;
 
     public TransactionResponseDTO(Transaction transaction) {
         this.id = transaction.getId();
@@ -38,6 +39,6 @@ public class TransactionResponseDTO implements Serializable {
         this.createdAt = transaction.getCreatedAt();
         this.updatedAt = transaction.getUpdatedAt();
         this.userId = transaction.getUser().getId();
-        this.categoryId = transaction.getCategoryId();
+        this.category = transaction.getCategory();
     }
 }

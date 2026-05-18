@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.fabricio.personal_finance_api.dto.TransactionRequestDTO;
-import com.fabricio.personal_finance_api.dto.TransactionResponseDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
-import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
@@ -66,7 +64,7 @@ public class TransactionService {
         newObj.setAmount(obj.getAmount());
         newObj.setType(obj.getType());
         newObj.setUser(obj.getUser());
-        newObj.setCategoryId(obj.getCategoryId());
+        newObj.setCategory(obj.getCategory());
     }
 
     public Transaction findByUserAndTransaction(Long userId, Long transactionId) {
@@ -103,7 +101,7 @@ public class TransactionService {
         transaction.setDescription(objDto.getDescription());
         transaction.setAmount(objDto.getAmount());
         transaction.setType(objDto.getType());
-        transaction.setCategoryId(objDto.getCategoryId());
+        transaction.setCategory(objDto.getCategory());
 
         return transaction;
     }
