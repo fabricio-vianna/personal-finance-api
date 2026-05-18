@@ -32,9 +32,9 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        userRepository.deleteAll();
-        categoryRespository.deleteAll();
         transactionRepository.deleteAll();
+        categoryRespository.deleteAll();
+        userRepository.deleteAll();
 
         // USERS
         User user1 = new User(null, "Fabricio Vianna", "fabricio@email.com", "123456", null, new ArrayList<>(), new ArrayList<>());
