@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import com.fabricio.personal_finance_api.entity.enums.CategoryType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,6 +39,7 @@ public class Category implements Serializable {
     @NotBlank
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private CategoryType type;
 
     @ManyToOne
