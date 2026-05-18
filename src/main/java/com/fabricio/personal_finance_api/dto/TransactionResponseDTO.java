@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TransactionDTO implements Serializable {
+public class TransactionResponseDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -180145505532167396L;
@@ -30,7 +30,7 @@ public class TransactionDTO implements Serializable {
     private Long userId;
     private Long categoryId;
 
-    public TransactionDTO(Transaction transaction) {
+    public TransactionResponseDTO(Transaction transaction) {
         this.id = transaction.getId();
         this.description = transaction.getDescription();
         this.amount = transaction.getAmount();

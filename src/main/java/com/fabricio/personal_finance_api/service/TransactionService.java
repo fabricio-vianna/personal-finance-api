@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import com.fabricio.personal_finance_api.dto.TransactionDTO;
+import com.fabricio.personal_finance_api.dto.TransactionRequestDTO;
+import com.fabricio.personal_finance_api.dto.TransactionResponseDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
@@ -96,17 +97,12 @@ public class TransactionService {
         return repository.findByUpdatedAtBetween(start, end);
     }
 
-    public Transaction fromDto(TransactionDTO objDto) {
+    public Transaction fromDto(TransactionRequestDTO objDto) {
         Transaction transaction = new Transaction();
 
-        transaction.setId(objDto.getId());
         transaction.setDescription(objDto.getDescription());
         transaction.setAmount(objDto.getAmount());
         transaction.setType(objDto.getType());
-
-        User user = userRepository.findById(objDto.getId()).orElseThrow(() -> new ObjectNotFoundException("User not found with id " + objDto.getId()));
-
-        transaction.setUser(user);
         transaction.setCategoryId(objDto.getCategoryId());
 
         return transaction;

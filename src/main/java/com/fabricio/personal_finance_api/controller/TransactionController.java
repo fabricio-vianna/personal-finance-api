@@ -4,7 +4,8 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.fabricio.personal_finance_api.dto.TransactionDTO;
+import com.fabricio.personal_finance_api.dto.TransactionRequestDTO;
+import com.fabricio.personal_finance_api.dto.TransactionResponseDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.service.ReportService;
@@ -34,7 +35,7 @@ public class TransactionController {
     private ReportService reportService;
 
     @PostMapping
-    public ResponseEntity<TransactionDTO> create(@Valid @RequestBody TransactionDTO objDto) {
+    public ResponseEntity<TransactionRequestDTO> create(@Valid @RequestBody TransactionRequestDTO objDto) {
         Transaction obj = service.fromDto(objDto);
         obj = service.create(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -42,20 +43,20 @@ public class TransactionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TransactionDTO>> findAll() {
+    public ResponseEntity<List<TransactionResponseDTO>> findAll() {
         List<Transaction> list = service.findAll();
-        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+        List<TransactionResponseDTO> listDto = list.stream().map(x -> new TransactionResponseDTO(x)).toList();
         return ResponseEntity.ok(listDto);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TransactionDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<TransactionResponseDTO> findById(@PathVariable Long id) {
         Transaction obj = service.findById(id);
-        return ResponseEntity.ok(new TransactionDTO(obj));
+        return ResponseEntity.ok(new TransactionResponseDTO(obj));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transaction> update(@RequestBody TransactionDTO objDto, @PathVariable Long id) {
+    public ResponseEntity<Transaction> update(@RequestBody TransactionRequestDTO objDto, @PathVariable Long id) {
         Transaction obj = service.fromDto(objDto);
         obj.setId(id);
         obj = service.update(obj);
@@ -69,33 +70,33 @@ public class TransactionController {
     }
 
     @GetMapping(value = "/categories/{categoryId}")
-    public ResponseEntity<List<TransactionDTO>> findByCategoryId(@PathVariable Long categoryId) {
+    public ResponseEntity<List<TransactionResponseDTO>> findByCategoryId(@PathVariable Long categoryId) {
         List<Transaction> obj = service.findByCategoryId(categoryId);
-        List<TransactionDTO> listDto = obj.stream().map(x -> new TransactionDTO(x)).toList();
+        List<TransactionResponseDTO> listDto = obj.stream().map(x -> new TransactionResponseDTO(x)).toList();
 
         return ResponseEntity.ok(listDto);
     }
 
     @GetMapping(value = "/type")
-    public ResponseEntity<List<TransactionDTO>> findByType(@RequestParam TransactionType type) {
+    public ResponseEntity<List<TransactionResponseDTO>> findByType(@RequestParam TransactionType type) {
         List<Transaction> list = service.findByType(type);
-        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+        List<TransactionResponseDTO> listDto = list.stream().map(x -> new TransactionResponseDTO(x)).toList();
 
         return ResponseEntity.ok(listDto);
     }
 
     @GetMapping(value = "/created-at")
-    public ResponseEntity<List<TransactionDTO>> findByCreatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
+    public ResponseEntity<List<TransactionResponseDTO>> findByCreatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
         List<Transaction> list = service.findByDate(start, end);
-        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+        List<TransactionResponseDTO> listDto = list.stream().map(x -> new TransactionResponseDTO(x)).toList();
 
         return ResponseEntity.ok(listDto);
     }
 
     @GetMapping(value = "updated-at")
-    public ResponseEntity<List<TransactionDTO>> findByUpdatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
+    public ResponseEntity<List<TransactionResponseDTO>> findByUpdatedAtBetween(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
         List<Transaction> list = service.findByUpdatedDate(start, end);
-        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+        List<TransactionResponseDTO> listDto = list.stream().map(x -> new TransactionResponseDTO(x)).toList();
 
         return ResponseEntity.ok(listDto);
     }

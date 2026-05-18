@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import com.fabricio.personal_finance_api.dto.CategoryDTO;
-import com.fabricio.personal_finance_api.dto.TransactionDTO;
+import com.fabricio.personal_finance_api.dto.TransactionResponseDTO;
 import com.fabricio.personal_finance_api.dto.UserDTO;
 import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.Transaction;
@@ -88,16 +88,16 @@ public class UserController {
     }
 
     @GetMapping("/{id}/transactions")
-    public ResponseEntity<List<TransactionDTO>> findTransactions(@PathVariable Long id) {
+    public ResponseEntity<List<TransactionResponseDTO>> findTransactions(@PathVariable Long id) {
         User obj = service.findById(id);
         List<Transaction> list = obj.getTransactions();
-        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).toList();
+        List<TransactionResponseDTO> listDto = list.stream().map(x -> new TransactionResponseDTO(x)).toList();
         return ResponseEntity.ok(listDto);
     }
 
     @GetMapping("/{userId}/transactions/{transactionId}")
-    public ResponseEntity<TransactionDTO> findTransactionsById(@PathVariable Long userId, @PathVariable Long transactionId) {
+    public ResponseEntity<TransactionResponseDTO> findTransactionsById(@PathVariable Long userId, @PathVariable Long transactionId) {
         Transaction obj = transactionService.findByUserAndTransaction(userId, transactionId);
-        return ResponseEntity.ok(new TransactionDTO(obj));
+        return ResponseEntity.ok(new TransactionResponseDTO(obj));
     }
 }
