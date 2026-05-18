@@ -1,8 +1,12 @@
 package com.fabricio.personal_finance_api.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
+import com.fabricio.personal_finance_api.dto.FinancialSummaryDTO;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
@@ -42,5 +46,19 @@ public class ReportService {
         }
 
         return sumIncome.subtract(sumExpense);
+    }
+
+    public FinancialSummaryDTO monthlyReport(Integer year, int month) {
+        LocalDateTime startDate = LocalDate.of(year, month, 1).atStartOfDay();
+
+        LocalDateTime endDate = startDate.withDayOfMonth(startDate.toLocalDate().lengthOfMonth()).withHour(23).withMinute(59).withSecond(59);
+
+        List<Transaction> list = repository.findByCreatedAtBetween(startDate, endDate);
+
+        BigDecimal totalIncome = list.stream().filter(x -> x.getType() == TransactionType.INCOME).map(Transaction::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalExpense = list.stream().filter(x -> x.getType() == TransactionType.EXPENSE).map(Transaction::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal balance = totalIncome.subtract(totalExpense);
+
+        return new FinancialSummaryDTO(Month.of(month).toString(), year, totalIncome, totalExpense, balance);
     }
 }
