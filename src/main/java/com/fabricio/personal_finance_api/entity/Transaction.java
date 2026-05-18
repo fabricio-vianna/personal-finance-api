@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "transactions")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Transaction implements Serializable {
     @Serial
