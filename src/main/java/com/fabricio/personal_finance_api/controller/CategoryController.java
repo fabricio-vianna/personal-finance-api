@@ -7,8 +7,10 @@ import com.fabricio.personal_finance_api.dto.CategoryDTO;
 import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.service.CategoryService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
+@Validated
 @RequestMapping("/categories")
 public class CategoryController {
 
@@ -35,7 +38,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<CategoryDTO> findById(@PathVariable @Positive Long id) {
         Category obj = service.findById(id);
         return ResponseEntity.ok(new CategoryDTO(obj));
     }
@@ -48,7 +51,7 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Category> update(@RequestBody CategoryDTO objDto, @PathVariable Long id) {
+    public ResponseEntity<Category> update(@Valid @RequestBody CategoryDTO objDto, @PathVariable Long id) {
         Category obj = service.fromDto(objDto);
         obj.setId(id);
         obj = service.update(obj);

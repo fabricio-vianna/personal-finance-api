@@ -15,6 +15,7 @@ import com.fabricio.personal_finance_api.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
+@Validated
 @RequestMapping("/users")
 public class UserController {
 
@@ -66,7 +68,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable Long id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody UserDTO objDto, @PathVariable Long id) {
         User obj = service.fromDto(objDto);
         obj.setId(id);
         obj = service.update(obj);

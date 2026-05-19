@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,7 +18,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,24 +43,34 @@ public class Transaction implements Serializable {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @NotBlank
+    @Column(nullable = false)
     private String description;
 
     @NotNull
+    @Positive
+    @Column(nullable = false)
     private BigDecimal amount;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TransactionType type;
 
-    @JsonIgnore
+    @NotNull
+    @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @PrePersist

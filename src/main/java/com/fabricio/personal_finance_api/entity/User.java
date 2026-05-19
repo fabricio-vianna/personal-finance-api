@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -39,13 +41,21 @@ public class User implements Serializable {
     private Long id;
 
     @NotBlank
+    @Column(nullable = false)
     private String name;
 
     @Email
+    @NotBlank
+    @Column(nullable = false)
     private String email;
 
     @JsonIgnore
+    @NotBlank
+    @Column(nullable = false)
     private String password;
+
+    @NotNull
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "user")
