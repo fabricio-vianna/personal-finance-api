@@ -4,7 +4,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,5 +29,5 @@ public class TransactionRequestDTO implements Serializable {
     private TransactionType type;
 
     @NotNull
-    private Category category;
+    private Long categoryId;
 }

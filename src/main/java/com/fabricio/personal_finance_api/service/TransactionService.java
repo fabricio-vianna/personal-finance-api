@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.fabricio.personal_finance_api.dto.TransactionRequestDTO;
+import com.fabricio.personal_finance_api.entity.Category;
 import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
@@ -97,7 +98,10 @@ public class TransactionService {
         transaction.setDescription(objDto.getDescription());
         transaction.setAmount(objDto.getAmount());
         transaction.setType(objDto.getType());
-        transaction.setCategory(objDto.getCategory());
+
+        Category category = categoryRespository.findById(objDto.getCategoryId()).orElseThrow(() -> new ObjectNotFoundException("Category not found with id " + objDto.getCategoryId()));
+
+        transaction.setCategory(category);
 
         return transaction;
     }
