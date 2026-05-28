@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
-import com.fabricio.personal_finance_api.dto.FinancialSummaryDTO;
-import com.fabricio.personal_finance_api.entity.Transaction;
-import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.model.dto.FinancialSummaryDTO;
+import com.fabricio.personal_finance_api.model.entity.Transaction;
+import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

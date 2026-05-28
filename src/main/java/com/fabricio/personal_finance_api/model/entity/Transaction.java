@@ -1,11 +1,11 @@
-package com.fabricio.personal_finance_api.entity;
+package com.fabricio.personal_finance_api.model.entity;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

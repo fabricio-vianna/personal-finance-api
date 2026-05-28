@@ -1,4 +1,4 @@
-package com.fabricio.personal_finance_api.entity.enums;
+package com.fabricio.personal_finance_api.model.entity.enums;
 
 public enum UserRole {
 

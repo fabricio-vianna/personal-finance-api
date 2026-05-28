@@ -3,12 +3,12 @@ package com.fabricio.personal_finance_api.controller;
 import java.net.URI;
 import java.util.List;
 
-import com.fabricio.personal_finance_api.dto.CategoryDTO;
-import com.fabricio.personal_finance_api.dto.TransactionResponseDTO;
-import com.fabricio.personal_finance_api.dto.UserDTO;
-import com.fabricio.personal_finance_api.entity.Category;
-import com.fabricio.personal_finance_api.entity.Transaction;
-import com.fabricio.personal_finance_api.entity.User;
+import com.fabricio.personal_finance_api.model.dto.CategoryDTO;
+import com.fabricio.personal_finance_api.model.dto.TransactionResponseDTO;
+import com.fabricio.personal_finance_api.model.dto.UserDTO;
+import com.fabricio.personal_finance_api.model.entity.Category;
+import com.fabricio.personal_finance_api.model.entity.Transaction;
+import com.fabricio.personal_finance_api.model.entity.User;
 import com.fabricio.personal_finance_api.service.CategoryService;
 import com.fabricio.personal_finance_api.service.TransactionService;
 import com.fabricio.personal_finance_api.service.UserService;

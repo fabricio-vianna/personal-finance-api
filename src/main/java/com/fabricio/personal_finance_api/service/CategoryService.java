@@ -3,9 +3,9 @@ package com.fabricio.personal_finance_api.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.fabricio.personal_finance_api.dto.CategoryDTO;
-import com.fabricio.personal_finance_api.entity.Category;
-import com.fabricio.personal_finance_api.entity.User;
+import com.fabricio.personal_finance_api.model.dto.CategoryDTO;
+import com.fabricio.personal_finance_api.model.entity.Category;
+import com.fabricio.personal_finance_api.model.entity.User;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
 import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;

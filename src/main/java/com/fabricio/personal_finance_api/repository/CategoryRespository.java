@@ -2,7 +2,7 @@ package com.fabricio.personal_finance_api.repository;
 
 import java.util.Optional;
 
-import com.fabricio.personal_finance_api.entity.Category;
+import com.fabricio.personal_finance_api.model.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRespository extends JpaRepository<Category, Long> {

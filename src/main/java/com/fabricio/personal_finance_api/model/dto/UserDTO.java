@@ -1,12 +1,10 @@
-package com.fabricio.personal_finance_api.dto;
+package com.fabricio.personal_finance_api.model.dto;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-import com.fabricio.personal_finance_api.entity.User;
-import com.fabricio.personal_finance_api.entity.enums.UserRole;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.fabricio.personal_finance_api.model.entity.User;
+import com.fabricio.personal_finance_api.model.entity.enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

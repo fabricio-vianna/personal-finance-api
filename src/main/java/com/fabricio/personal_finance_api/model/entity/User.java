@@ -1,4 +1,4 @@
-package com.fabricio.personal_finance_api.entity;
+package com.fabricio.personal_finance_api.model.entity;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.fabricio.personal_finance_api.entity.enums.UserRole;
+import com.fabricio.personal_finance_api.model.entity.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

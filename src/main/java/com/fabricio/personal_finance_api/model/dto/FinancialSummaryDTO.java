@@ -1,4 +1,4 @@
-package com.fabricio.personal_finance_api.dto;
+package com.fabricio.personal_finance_api.model.dto;
 
 import java.io.Serial;
 import java.io.Serializable;

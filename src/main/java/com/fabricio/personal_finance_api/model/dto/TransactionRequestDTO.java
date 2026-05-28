@@ -1,10 +1,10 @@
-package com.fabricio.personal_finance_api.dto;
+package com.fabricio.personal_finance_api.model.dto;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

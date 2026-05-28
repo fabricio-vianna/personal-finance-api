@@ -1,9 +1,9 @@
-package com.fabricio.personal_finance_api.entity;
+package com.fabricio.personal_finance_api.model.entity;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-import com.fabricio.personal_finance_api.entity.enums.CategoryType;
+import com.fabricio.personal_finance_api.model.entity.enums.CategoryType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,25 +1,25 @@
-package com.fabricio.personal_finance_api.config;
+package com.fabricio.personal_finance_api.seeder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.fabricio.personal_finance_api.entity.Category;
-import com.fabricio.personal_finance_api.entity.Transaction;
-import com.fabricio.personal_finance_api.entity.User;
-import com.fabricio.personal_finance_api.entity.enums.CategoryType;
-import com.fabricio.personal_finance_api.entity.enums.TransactionType;
-import com.fabricio.personal_finance_api.entity.enums.UserRole;
+import com.fabricio.personal_finance_api.model.entity.Category;
+import com.fabricio.personal_finance_api.model.entity.Transaction;
+import com.fabricio.personal_finance_api.model.entity.User;
+import com.fabricio.personal_finance_api.model.entity.enums.CategoryType;
+import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.model.entity.enums.UserRole;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
-public class Instantiation implements CommandLineRunner {
+@Component
+public class DatabaseSeeder implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;

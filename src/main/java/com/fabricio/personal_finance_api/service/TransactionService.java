@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import com.fabricio.personal_finance_api.dto.TransactionRequestDTO;
-import com.fabricio.personal_finance_api.entity.Category;
-import com.fabricio.personal_finance_api.entity.Transaction;
-import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.model.dto.TransactionRequestDTO;
+import com.fabricio.personal_finance_api.model.entity.Category;
+import com.fabricio.personal_finance_api.model.entity.Transaction;
+import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
 import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;

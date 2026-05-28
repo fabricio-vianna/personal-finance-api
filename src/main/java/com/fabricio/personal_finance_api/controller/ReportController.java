@@ -2,8 +2,8 @@ package com.fabricio.personal_finance_api.controller;
 
 import java.math.BigDecimal;
 
-import com.fabricio.personal_finance_api.dto.FinancialSummaryDTO;
-import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.model.dto.FinancialSummaryDTO;
+import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

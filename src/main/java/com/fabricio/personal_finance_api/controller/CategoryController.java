@@ -3,8 +3,8 @@ package com.fabricio.personal_finance_api.controller;
 import java.net.URI;
 import java.util.List;
 
-import com.fabricio.personal_finance_api.dto.CategoryDTO;
-import com.fabricio.personal_finance_api.entity.Category;
+import com.fabricio.personal_finance_api.model.dto.CategoryDTO;
+import com.fabricio.personal_finance_api.model.entity.Category;
 import com.fabricio.personal_finance_api.service.CategoryService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;

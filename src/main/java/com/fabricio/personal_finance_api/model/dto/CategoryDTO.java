@@ -1,10 +1,10 @@
-package com.fabricio.personal_finance_api.dto;
+package com.fabricio.personal_finance_api.model.dto;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-import com.fabricio.personal_finance_api.entity.Category;
-import com.fabricio.personal_finance_api.entity.enums.CategoryType;
+import com.fabricio.personal_finance_api.model.entity.Category;
+import com.fabricio.personal_finance_api.model.entity.enums.CategoryType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

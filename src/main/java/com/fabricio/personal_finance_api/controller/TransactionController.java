@@ -4,10 +4,10 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.fabricio.personal_finance_api.dto.TransactionRequestDTO;
-import com.fabricio.personal_finance_api.dto.TransactionResponseDTO;
-import com.fabricio.personal_finance_api.entity.Transaction;
-import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.model.dto.TransactionRequestDTO;
+import com.fabricio.personal_finance_api.model.dto.TransactionResponseDTO;
+import com.fabricio.personal_finance_api.model.entity.Transaction;
+import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.service.ReportService;
 import com.fabricio.personal_finance_api.service.TransactionService;
 import jakarta.validation.Valid;

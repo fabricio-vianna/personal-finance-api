@@ -3,8 +3,8 @@ package com.fabricio.personal_finance_api.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.fabricio.personal_finance_api.dto.UserDTO;
-import com.fabricio.personal_finance_api.entity.User;
+import com.fabricio.personal_finance_api.model.dto.UserDTO;
+import com.fabricio.personal_finance_api.model.entity.User;
 import com.fabricio.personal_finance_api.repository.UserRepository;
 import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
