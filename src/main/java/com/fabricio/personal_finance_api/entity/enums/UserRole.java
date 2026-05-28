@@ -1,0 +1,17 @@
+package com.fabricio.personal_finance_api.entity.enums;
+
+public enum UserRole {
+
+    ADMIN("admin"),
+    USER("user");
+
+    private String role;
+
+    UserRole(String role) {
+        this.role = role;
+    }
+
+    public String getValue() {
+        return role;
+    }
+}

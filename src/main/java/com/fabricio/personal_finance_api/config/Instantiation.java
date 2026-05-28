@@ -10,6 +10,7 @@ import com.fabricio.personal_finance_api.entity.Transaction;
 import com.fabricio.personal_finance_api.entity.User;
 import com.fabricio.personal_finance_api.entity.enums.CategoryType;
 import com.fabricio.personal_finance_api.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.entity.enums.UserRole;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
 import com.fabricio.personal_finance_api.repository.UserRepository;
@@ -37,9 +38,9 @@ public class Instantiation implements CommandLineRunner {
         userRepository.deleteAll();
 
         // USERS
-        User user1 = new User(null, "Fabricio Vianna", "fabricio@email.com", "123456", null, new ArrayList<>(), new ArrayList<>());
-        User user2 = new User(null, "Maria Oliveira", "maria@email.com", "654321", null, new ArrayList<>(), new ArrayList<>());
-        User user3 = new User(null, "João Souza", "joao@email.com", "111222", null, new ArrayList<>(), new ArrayList<>());
+        User user1 = new User(null, "Fabricio Vianna", "fabricio@email.com", "123456", null, new ArrayList<>(), new ArrayList<>(), UserRole.ADMIN);
+        User user2 = new User(null, "Maria Oliveira", "maria@email.com", "654321", null, new ArrayList<>(), new ArrayList<>(), UserRole.USER);
+        User user3 = new User(null, "João Souza", "joao@email.com", "111222", null, new ArrayList<>(), new ArrayList<>(), UserRole.USER);
 
         userRepository.saveAll(Arrays.asList(user1, user2, user3));
 

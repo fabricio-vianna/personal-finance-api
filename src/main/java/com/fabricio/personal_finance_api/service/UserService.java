@@ -53,6 +53,7 @@ public class UserService {
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
         newObj.setPassword(obj.getPassword());
+        newObj.setRole(obj.getRole());
     }
 
     public User fromDto(UserDTO objDto) {
@@ -61,6 +62,7 @@ public class UserService {
         user.setId(objDto.getId());
         user.setName(objDto.getName());
         user.setEmail(objDto.getEmail());
+        user.setRole(objDto.getRole());
 
         return user;
     }
