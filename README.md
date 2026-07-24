@@ -72,7 +72,7 @@ Entity
 | Spring Data JPA | Persistência de dados |
 | Maven | Gerenciamento de dependências |
 | Lombok | Redução de código boilerplate |
-| H2 Database | Banco de dados em desenvolvimento |
+| PostgreSQL  | Banco de dados |
 | Postman | Testes da API |
 
 ---
