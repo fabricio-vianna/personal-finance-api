@@ -31,6 +31,9 @@ public class UserDTO implements Serializable {
     @Email
     private String email;
 
+    @NotBlank
+    private String password;
+
     @NotNull
     private UserRole role;
 
@@ -38,6 +41,7 @@ public class UserDTO implements Serializable {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
+        this.password = user.getPassword();
         this.role = user.getRole();
     }
 }

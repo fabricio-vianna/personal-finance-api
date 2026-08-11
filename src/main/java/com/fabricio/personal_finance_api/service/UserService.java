@@ -9,6 +9,7 @@ import com.fabricio.personal_finance_api.repository.UserRepository;
 import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +18,11 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public User create(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);
     }
 
@@ -62,6 +67,7 @@ public class UserService {
         user.setId(objDto.getId());
         user.setName(objDto.getName());
         user.setEmail(objDto.getEmail());
+        user.setPassword(objDto.getPassword());
         user.setRole(objDto.getRole());
 
         return user;
