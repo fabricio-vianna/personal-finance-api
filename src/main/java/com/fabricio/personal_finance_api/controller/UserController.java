@@ -40,14 +40,6 @@ public class UserController {
     @Autowired
     private TransactionService transactionService;
 
-//    @PostMapping
-//    public ResponseEntity<User> create(@Valid @RequestBody UserDTO objDto) {
-//        User obj = service.fromDto(objDto);
-//        obj = service.create(obj);
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-//        return ResponseEntity.created(uri).build();
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
         User obj = service.findById(id);
