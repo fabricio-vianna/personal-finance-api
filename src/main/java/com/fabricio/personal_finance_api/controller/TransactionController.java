@@ -8,6 +8,7 @@ import com.fabricio.personal_finance_api.model.dto.TransactionRequestDTO;
 import com.fabricio.personal_finance_api.model.dto.TransactionResponseDTO;
 import com.fabricio.personal_finance_api.model.entity.Transaction;
 import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
+import com.fabricio.personal_finance_api.service.AuthorizationService;
 import com.fabricio.personal_finance_api.service.ReportService;
 import com.fabricio.personal_finance_api.service.TransactionService;
 import jakarta.validation.Valid;
@@ -36,6 +37,9 @@ public class TransactionController {
     @Autowired
     private ReportService reportService;
 
+    @Autowired
+    private AuthorizationService authorizationService;
+
     @PostMapping
     public ResponseEntity<TransactionRequestDTO> create(@Valid @RequestBody TransactionRequestDTO objDto) {
         Transaction obj = service.fromDto(objDto);
@@ -53,21 +57,24 @@ public class TransactionController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<TransactionResponseDTO> findById(@PathVariable Long id) {
-        Transaction obj = service.findById(id);
+        Long userId = authorizationService.getAuthenticatedUser().getId();
+        Transaction obj = service.findByIdAndUser(id, userId);
         return ResponseEntity.ok(new TransactionResponseDTO(obj));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Transaction> update(@Valid @RequestBody TransactionRequestDTO objDto, @PathVariable Long id) {
+        Long userId = authorizationService.getAuthenticatedUser().getId();
         Transaction obj = service.fromDto(objDto);
         obj.setId(id);
-        obj = service.update(obj);
+        service.update(obj, userId);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
+        Long userId = authorizationService.getAuthenticatedUser().getId();
+        service.delete(id, userId);
         return ResponseEntity.noContent().build();
     }
 

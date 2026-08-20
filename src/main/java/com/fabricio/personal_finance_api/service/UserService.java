@@ -22,6 +22,10 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User create(User user) {
+        if (repository.findByEmail(user.getEmail()) != null) {
+            throw new IllegalArgumentException("Email already registered");
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);
     }

@@ -54,7 +54,7 @@ public class User implements Serializable, UserDetails {
 
     @Email
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @JsonIgnore

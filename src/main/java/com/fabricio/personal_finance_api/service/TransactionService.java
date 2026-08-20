@@ -10,9 +10,9 @@ import com.fabricio.personal_finance_api.model.entity.Transaction;
 import com.fabricio.personal_finance_api.model.entity.enums.TransactionType;
 import com.fabricio.personal_finance_api.repository.CategoryRespository;
 import com.fabricio.personal_finance_api.repository.TransactionRepository;
+import com.fabricio.personal_finance_api.repository.UserRepository;
 import com.fabricio.personal_finance_api.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +23,9 @@ public class TransactionService {
 
     @Autowired
     private CategoryRespository categoryRespository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Transaction create(Transaction obj) {
         return repository.save(obj);
@@ -37,23 +40,23 @@ public class TransactionService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found with id " + id));
     }
 
-    public Transaction update(Transaction obj) {
-        try {
-            Transaction newObj = findById(obj.getId());
-            updateData(newObj, obj);
-            return repository.save(newObj);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ObjectNotFoundException("Object not found with id " + obj.getId());
-        }
-    }
-
-    public void delete(Long id) {
-        try {
-            findById(id);
-            repository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
+    public Transaction findByIdAndUser(Long id, Long userId) {
+        Transaction obj = findById(id);
+        if (!obj.getUser().getId().equals(userId)) {
             throw new ObjectNotFoundException("Object not found with id " + id);
         }
+        return obj;
+    }
+
+    public Transaction update(Transaction obj, Long userId) {
+        Transaction newObj = findByIdAndUser(obj.getId(), userId);
+        updateData(newObj, obj);
+        return repository.save(newObj);
+    }
+
+    public void delete(Long id, Long userId) {
+        Transaction obj = findByIdAndUser(id, userId);
+        repository.deleteById(obj.getId());
     }
 
     private void updateData(Transaction newObj, Transaction obj) {
@@ -66,9 +69,7 @@ public class TransactionService {
 
     public Transaction findByUserAndTransaction(Long userId, Long transactionId) {
 
-        repository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("User not found with id " + userId));
-        repository.findById(transactionId).orElseThrow(() -> new ObjectNotFoundException("Transaction not found with id " + transactionId));
-
+        userRepository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("User not found with id " + userId));
 
         Optional<Transaction> obj = repository.findByIdAndUser_Id(transactionId, userId);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Transaction not found with this user"));
